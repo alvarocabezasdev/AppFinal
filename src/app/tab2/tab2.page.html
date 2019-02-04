@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="end">
+          <ion-menu-button>
+          </ion-menu-button>
+        </ion-buttons>
+    <ion-title>
+      {{ 'Mi coche' | translate }}
+    </ion-title>
+    <!--<div class="stats" (click)="presentModal()"><ion-img  src="/assets/icon/stats.png"  ></ion-img></div> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<form [formGroup]="todo" (ngSubmit)="logForm()">
+
+<ion-card>
+    <ion-img src="/assets/icon/mercedesCls.jpeg"></ion-img>
+    <ion-card-header>
+        <ion-card-title>Mercedes Cls 320 - 2006</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        <p>{{ 'Consumo' | translate }}: 10,3 l/100km</p>
+    </ion-card-content>
+</ion-card>
+
+
+
+<ion-grid>
+  <ion-row align-items-center>
+
+    <ion-col>
+      <ion-item>
+       <div (click)="reset0()">{{this.importeFijo}} €</div>
+      </ion-item>
+    </ion-col>
+        <ion-col>
+      <ion-button  shape="round" color="primary" fill="outline" (click)="sumar5()" >+5</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button  shape="round" color="primary" fill="outline" (click)="sumar10()" >+10</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-button class="añadir" align-center size="default" type="submit">{{ 'Añadir' | translate }}</ion-button>
+
+</form>
+
+</ion-content>

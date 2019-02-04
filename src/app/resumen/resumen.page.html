@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+ 
+    <ion-title>{{ 'Estadisticas' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div class="iconos">
+    
+    <ion-img src="/assets/icon/24hours.png"> </ion-img>
+  
+    <ion-img src="/assets/icon/calendar.png">  </ion-img>
+    
+    <ion-img src="/assets/icon/total.png">  </ion-img>
+
+  </div>
+
+  <div class="importes">
+      <h2>{{getDia()}}  €</h2>
+      <h2>{{getMes()}}  €</h2>
+      <h2>{{getTotal()}}  €</h2>
+  </div>
+
+    
+</ion-content>
