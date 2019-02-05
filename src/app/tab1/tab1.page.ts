@@ -5,6 +5,7 @@ import leaflet from 'leaflet';
 import { HttpClient } from '@angular/common/http';
 import 'leaflet-routing-machine';
 import { removeDebugNodeFromIndex } from '@angular/core/src/debug/debug_node';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class Tab1Page {
       });
   
 
-  constructor(private http: HttpClient,private miServicio: TodoserviciosService) {
+  constructor(private http: HttpClient,private miServicio: TodoserviciosService,
+    public loadingController: LoadingController) {
 
 
 
@@ -105,6 +107,7 @@ export class Tab1Page {
 
  
   loadmap() {
+    this.presentLoading("Cargando posición");
     this.map = leaflet.map("map").fitWorld();
     leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attributions: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -117,14 +120,17 @@ export class Tab1Page {
       maxZoom: 16,
       
     }).on('locationfound', (e) => {
-      let markerGroup = leaflet.featureGroup();
 
+      
+      let markerGroup = leaflet.featureGroup();
+      this.loadingController.dismiss();
       this.lat1 = e.latitude;
       this.lon1 = e.longitude;
 
       let marker: any = leaflet.marker([e.latitude, e.longitude], {icon: this.coche}).on('click', () => {
-
+    
         alert('Usted está aquí');
+        
       })
       markerGroup.addLayer(marker);
       this.map.addLayer(markerGroup);
@@ -134,6 +140,13 @@ export class Tab1Page {
 
 
  
+  }
+
+  async presentLoading(msg) {
+    let myloading = await this.loadingController.create({
+      message: msg
+    });
+    return await myloading.present();
   }
 
 

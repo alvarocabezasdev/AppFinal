@@ -52,6 +52,7 @@
     "leaflet": "^1.4.0",
     "leaflet-routing-machine": "^3.2.12",
     "leaflet.motion": "^0.1.1",
+    "run": "1.4.0",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },

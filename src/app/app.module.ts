@@ -57,7 +57,6 @@ export function setTranslateLoader(http: any){
     SplashScreen,
     Geolocation,
     EmailComposer,
-
     TodoserviciosService,
     HttpClient,
     HttpClientModule,
