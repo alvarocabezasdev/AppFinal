@@ -2,7 +2,7 @@ import { TodoserviciosService } from './../servicios/TodoserviciosService';
 import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
-import { setTranslateLoader } from '../app.module';
+
 
 
 

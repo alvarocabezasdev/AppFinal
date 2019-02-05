@@ -74,6 +74,12 @@ export class TodoserviciosService {
     return this.props.lang;
   }
 
+  borrarRegistro(id){
+    
+    return this.myCollection.doc(id).delete();
+    
+  }
+
   
 
 }

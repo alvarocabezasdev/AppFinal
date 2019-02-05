@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
-import { setTranslateLoader } from '../app.module';
+
 
 
 @Component({
@@ -12,7 +12,8 @@ export class EscribenosPage implements OnInit {
 
   email = "alvarocabezasdev@gmail.com";
 
-  constructor(public emailComposer: EmailComposer) { }
+  constructor(public emailComposer: EmailComposer
+            ) { }
 
   ngOnInit() {
   }

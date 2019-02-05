@@ -1,6 +1,7 @@
+import { Tab3PageModule } from './tab3/tab3.module';
 import { Component } from '@angular/core';
 
-import { Platform, ModalController, NavController } from '@ionic/angular';
+import { Platform, ModalController, NavController, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -36,6 +37,7 @@ export class AppComponent {
     private translate: TranslateService,
     public router: Router,
     public todoS: TodoserviciosService,
+    private alertCtrl: AlertController,
     
     
   ) {
@@ -70,10 +72,6 @@ export class AppComponent {
 
   }
 
-
-
-
-
-
+  
 
 }

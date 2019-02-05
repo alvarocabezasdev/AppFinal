@@ -3,6 +3,8 @@ import { TodoserviciosService } from '../servicios/TodoserviciosService';
 import { LoadingController, ModalController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { forEach } from '@angular/router/src/utils/collection';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-tab3',
@@ -120,7 +122,11 @@ export class Tab3Page {
   }
 
   getImporteDia(){
-    this.todoS.setDia(parseInt(this.listadoPanel[0].importe));
+    if(this.listadoPanel.length!=0){
+      this.todoS.setDia(parseInt(this.listadoPanel[0].importe));
+
+    }
+    
   }
 
   actualizarPage(){
@@ -155,6 +161,38 @@ export class Tab3Page {
 
   toggleInfiniteScroll() {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
+
+  async borrarRegistros(){
+
+    let alert = await this.alertCtrl.create({
+      header: '¿Estas seguro?',
+      message: 'Se borran todos los datos',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+            
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Buy clicked');
+            this.listadoPanel.forEach((doc1) => {
+              this.todoS.borrarRegistro(doc1.id);
+            });
+            this.actualizarPage();
+
+          }
+        }
+        
+      ]
+    });
+    await alert.present();
+
   }
 
 
