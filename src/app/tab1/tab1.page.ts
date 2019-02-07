@@ -135,6 +135,8 @@ export class Tab1Page {
       markerGroup.addLayer(marker);
       this.map.addLayer(markerGroup);
       }).on('locationerror', (err) => {
+        this.loadingController.dismiss();
+
         alert(err.message);
     })
 
