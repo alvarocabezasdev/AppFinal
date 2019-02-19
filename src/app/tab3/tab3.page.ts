@@ -195,6 +195,40 @@ export class Tab3Page {
 
   }
 
+  async borrarRegistro(id){
+
+    let alert = await this.alertCtrl.create({
+      header: '¿Estas seguro?',
+      message: 'Se borrará la entrada',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+            
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Buy clicked');
+            
+              this.todoS.borrarRegistro(id);
+            
+            this.actualizarPage();
+
+          }
+        }
+        
+      ]
+    });
+    await alert.present();
+
+  }
+
+
+
 
 
  

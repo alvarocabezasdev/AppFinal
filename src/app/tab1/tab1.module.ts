@@ -10,7 +10,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { setTranslateLoader } from '../app.module';
 
-
 @NgModule({
   imports: [
     IonicModule,

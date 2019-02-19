@@ -24,11 +24,11 @@
 
       <ion-item-sliding *ngFor="let item of listadoPanel;let i = index">
 
-      <ion-item>
+      <ion-item (click)="borrarRegistro(item.id)">
               <ion-avatar slot="start">
                 <img src="assets/icon/gas-station.png">
               </ion-avatar>
-              <ion-label>
+              <ion-label >
                 <h2>{{item.importe}} €</h2>
                 <h3>{{item.fecha}}</h3>
                 

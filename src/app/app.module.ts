@@ -1,3 +1,4 @@
+import { BrowserTab } from '@ionic-native/browser-tab/ngx';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -20,6 +21,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
 
 
 export function setTranslateLoader(http: any){
@@ -58,7 +61,9 @@ export function setTranslateLoader(http: any){
     Geolocation,
     EmailComposer,
     TodoserviciosService,
+    BrowserTab,
     HttpClient,
+    InAppBrowser,
     HttpClientModule,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

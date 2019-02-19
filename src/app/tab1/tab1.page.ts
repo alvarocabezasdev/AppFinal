@@ -1,11 +1,13 @@
+import { browser } from 'protractor';
 import { Geolocation } from '@ionic-native/geolocation';
 import { TodoserviciosService } from './../servicios/TodoserviciosService';
 import { Component,OnInit, ViewChild, ElementRef, Injectable } from '@angular/core';
 import leaflet from 'leaflet';
 import { HttpClient } from '@angular/common/http';
 import 'leaflet-routing-machine';
-import { removeDebugNodeFromIndex } from '@angular/core/src/debug/debug_node';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, AlertController } from '@ionic/angular';
+import { InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+import { BrowserTab } from '@ionic-native/browser-tab/ngx';
 
 
 @Component({
@@ -41,7 +43,10 @@ export class Tab1Page {
   
 
   constructor(private http: HttpClient,private miServicio: TodoserviciosService,
-    public loadingController: LoadingController) {
+    public loadingController: LoadingController,
+    private browserTab: BrowserTab,
+    private alertCtrl: AlertController,
+    private iab: InAppBrowser) {
 
 
 
@@ -72,8 +77,23 @@ export class Tab1Page {
 //importante
       myLayer.addData(misestaciones);
 
-    });
+      myLayer.on('click',(e)=>{
+        
+        this.iniciarRuta(e["layer"]["feature"]["properties"]["dirección"].toString(),
+        e["layer"]["feature"]["properties"]["localidad"].toString(),
+        e["layer"]["feature"]["properties"]["latitud"].toString(),
+        e["layer"]["feature"]["properties"]["longitud"].toString());
+      
 
+        //this.iniciarRuta(e["layer"]["feature"]["properties"]["dirección"].toString(),e["layer"]["feature"]["properties"]["localidad"].toString()
+        //,e["layer"]["feature"]["properties"]["latitud"].toString(),e["layer"]["feature"]["properties"]["longitud"].toString());
+        /*  
+        alert('https://www.google.com/maps/dir/'+e["layer"]["feature"]["properties"]["latitud"]+','+e["layer"]["feature"]["properties"]["longitud"]
+        +'/'+this.lat1+','+this.lon1+'/');
+        */
+      });
+
+});
     
 
   }
@@ -97,7 +117,7 @@ export class Tab1Page {
 
 
   ionViewDidLoad(){
-      
+    
   }
 
   ionViewDidLeave(){
@@ -129,9 +149,15 @@ export class Tab1Page {
 
       let marker: any = leaflet.marker([e.latitude, e.longitude], {icon: this.coche}).on('click', () => {
     
-        alert('Usted está aquí');
-        
-      })
+        alert('Usted está aquí -> '+'Lat: '+e.latitude+', Lon: '+e.longitude);
+        /*
+        var geocodeService = leaflet.esri.Geocoding.geocodeService();
+
+        geocodeService.reverse().latlng(e.latlng).run(function(error, result) {
+          leaflet.marker(result.latlng).addTo(this.map).bindPopup(result.address.Match_addr).openPopup();
+        });
+        */
+      });
       markerGroup.addLayer(marker);
       this.map.addLayer(markerGroup);
       }).on('locationerror', (err) => {
@@ -140,6 +166,7 @@ export class Tab1Page {
         alert(err.message);
     })
 
+    
 
  
   }
@@ -149,6 +176,32 @@ export class Tab1Page {
       message: msg
     });
     return await myloading.present();
+  }
+
+
+
+  async iniciarRuta(direccion :any, localidad :any, latitud :any, longitud :any){
+
+    let alert = await this.alertCtrl.create({
+      header: direccion,
+      message: localidad,
+      buttons: [
+        {
+          text: 'Abrir en google maps',
+          handler: () => {
+            
+            console.log('Buy clicked');
+            this.browserTab.openUrl('https://www.google.com/maps/dir/'+latitud+','+longitud
+            +'/'+this.lat1+','+this.lon1+'/');
+            //this.browserTab.openUrl('https://www.google.com/maps/dir/'+latitud+','+longitud
+            //+'/'+this.lat1+','+this.lon1+'/');
+
+          }
+        }
+        
+      ]
+    });
+    await alert.present();
   }
 
 
