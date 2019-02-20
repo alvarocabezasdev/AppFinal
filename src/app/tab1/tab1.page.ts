@@ -191,8 +191,8 @@ export class Tab1Page {
           handler: () => {
             
             console.log('Buy clicked');
-            this.browserTab.openUrl('https://www.google.com/maps/dir/'+latitud+','+longitud
-            +'/'+this.lat1+','+this.lon1+'/');
+            this.browserTab.openUrl('https://www.google.com/maps/dir/'+this.lat1+','+this.lon1
+            +'/'+latitud+','+longitud+'/');
             //this.browserTab.openUrl('https://www.google.com/maps/dir/'+latitud+','+longitud
             //+'/'+this.lat1+','+this.lon1+'/');
 
