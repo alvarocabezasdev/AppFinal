@@ -99,8 +99,15 @@ export class Tab1Page {
   }
 
 
-
-  calcularDistancia(lat1, lon1, lat2, lon2){
+/**
+ * 
+ * @param lat1 
+ * @param lon1 
+ * @param lat2 
+ * @param lon2 
+ * @return Devuelve un String de la distancia entre 2 pares de coordenadas
+ */
+  calcularDistancia(lat1, lon1, lat2, lon2): string{
     this.rad = function(x) {return x*Math.PI/180;}
     var R = 6378.137; //Radio de la tierra en km
     var dLat = this.rad( lat2 - lat1 );
@@ -108,7 +115,7 @@ export class Tab1Page {
     var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(this.rad(lat1)) * Math.cos(this.rad(lat2)) * Math.sin(dLong/2) * Math.sin(dLong/2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c;
-   return d.toFixed(3); //Retorna tres decimales
+    return d.toFixed(3); //Retorna tres decimales
     }
 
 
@@ -152,7 +159,6 @@ export class Tab1Page {
         alert('Usted está aquí -> '+'Lat: '+e.latitude+', Lon: '+e.longitude);
         /*
         var geocodeService = leaflet.esri.Geocoding.geocodeService();
-
         geocodeService.reverse().latlng(e.latlng).run(function(error, result) {
           leaflet.marker(result.latlng).addTo(this.map).bindPopup(result.address.Match_addr).openPopup();
         });
@@ -171,7 +177,13 @@ export class Tab1Page {
  
   }
 
-  async presentLoading(msg) {
+/**
+ * 
+ * @param msg 
+ * @return Devuelve un Promise de un mensaje de carga
+ */
+
+  async presentLoading(msg):Promise<void> {
     let myloading = await this.loadingController.create({
       message: msg
     });

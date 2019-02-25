@@ -31,8 +31,11 @@ export class Tab3Page {
     private alertCtrl: AlertController) {
   }
 
-
-  getTotal(){
+/**
+ * @return Devuelve el total de todos los importe en la base de datos
+ * 
+ */
+  getTotal():number{
     for(let data of this.listadoPanel) {
       this.total = this.total + parseInt(data.importe);
       this.totalTemp = this.total;
@@ -82,6 +85,10 @@ export class Tab3Page {
     await this.dynamicList.closeSlidingItems();
   }
 
+  /**
+ * 
+ * @return Devuelve un Promise de un mensaje de carga
+ */
   async presentLoading(msg) {
     let myloading = await this.loadingController.create({
       message: msg
@@ -93,6 +100,10 @@ export class Tab3Page {
     this.listadoPanel = this.listado;
   }
 
+    /**
+ * 
+ * @return Devuelve el resultado de una busqueda en el listado
+ */
   getItems(ev: any) {
     this.initializeItems();
     let val = ev.target.value;
@@ -102,6 +113,7 @@ export class Tab3Page {
       })
     }
   }
+  
 
   getImporteMes(){
 

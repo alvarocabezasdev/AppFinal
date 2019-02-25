@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { iProps } from './iProps';
 })
 export class TodoserviciosService {
   
-  myCollection: any;
+  myCollection: AngularFirestoreCollection<any>;
   gasolineras: Observable<any>;
 
   listado = [];
@@ -30,11 +30,19 @@ export class TodoserviciosService {
     this.myCollection = fireStore.collection<any>(environment.firebaseConfig.todoColeccion);
   }
 
-  leeRegistro() {
+  /**
+   * @return Devuelve un Observable con la coleccion de los registros de la base de datos
+   */
+  leeRegistro(): Observable<firebase.firestore.QuerySnapshot>{
     return this.myCollection.get();
   }
 
-  agregaRegistro(datos) {
+  /**
+   * 
+   * @param datos 
+   * @return Devuelve un Promise referenciado a un Documento de firebase
+   */
+  agregaRegistro(datos): Promise<firebase.firestore.DocumentReference> {
     return this.myCollection.add(datos);
   }
 
@@ -53,15 +61,23 @@ export class TodoserviciosService {
     this.total = total;
   }
 
-  getDia(){
+  /**
+   * @return Devuelve la variable Dia 
+   */
+  getDia(): any{
     return this.dia;
   }
 
-  getMes(){
+  /**
+   * @return Devuelve la variable Mes
+   */
+  getMes(): any{
     return this.mes;
   }
-
-  getTotal(){
+/**
+ * @return Devuelve la variable Total
+ */
+  getTotal(): any{
     return this.total;
   }
 
@@ -70,11 +86,19 @@ export class TodoserviciosService {
     //return this.storage.set("props", this.props);
   }
 
+/**
+ *  @return Devuelve la variable lang de la interfaz iProps
+ */
   getLang() {
     return this.props.lang;
   }
 
-  borrarRegistro(id){
+  /**
+   * 
+   * @param id 
+   * @return Devuelve un Promise con el borrado de un registro de la base de datos
+   */
+  borrarRegistro(id): Promise<void>{
     
     return this.myCollection.doc(id).delete();
     

@@ -27,17 +27,26 @@ export class ResumenPage implements OnInit {
     this.modalControler.dismiss();
   }
 
+  /**
+   * @return Devuelve la variable Dia del servicio
+   */
   getDia(){
     console.log("Dia: "+this.servicio.getDia());
     return this.servicio.getDia();
   }
 
+    /**
+   * @return Devuelve la variable Mes del servicio
+   */
   getMes(){
     console.log("Mes: "+this.servicio.getMes());
 
     return this.servicio.getMes();
   }
 
+  /**
+   * @return Devuelve la variable Total del servicio.
+   */
   getTotal(){
     console.log("Total: "+this.servicio.getTotal());
 

@@ -77,6 +77,11 @@ export class Tab2Page {
       });
   }
   /* Es un componente de la interfaz IONIC v4 */
+
+  /**
+ * 
+ * @return Devuelve un Promise de un mensaje de carga
+ */
   async presentLoading() {
     this.myloading = await this.loadingController.create({
       message: 'Guardando'
@@ -85,6 +90,9 @@ export class Tab2Page {
     return await this.myloading.present();
   }
 
+  /**
+   * Suma 5 al importe introducido
+   */
   sumar5(){
     
     if(!this.importeFijo){
@@ -94,6 +102,9 @@ export class Tab2Page {
     
   }
 
+    /**
+   * Suma 10 al importe introducido
+   */
   sumar10(){
     if(!this.importeFijo){
       this.importeFijo=0;
@@ -101,7 +112,9 @@ export class Tab2Page {
     }else{this.importeFijo+=10;}
     
   }
-
+  /**
+   * Resetea a 0 el importe introducido
+   */
   reset0(){
     this.importeFijo = 0;
   }
